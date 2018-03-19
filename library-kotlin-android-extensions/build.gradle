@@ -38,11 +38,38 @@ android {
             minifyEnabled false
         }
     }
+    signingConfigs {
+
+        release {
+
+            storeFile file("../../xwray-keystore.jks")
+
+            storePassword "B5r5AipE6Un4"
+
+            keyAlias "groupie-key"
+
+            keyPassword "pX16YszW9lyJ"
+
+        }
+
+    }
+
+    buildTypes {
+
+        release {
+
+            signingConfig signingConfigs.release
+
+            minifyEnabled false
+
+        }
+
+    }
 
 }
 
 dependencies {
-    compileOnly 'com.xwray:groupie:2.1.0-alpha1'
+    compileOnly 'com.xwray:groupie:2.1.0-alpha3'
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
 }
 
@@ -58,7 +85,7 @@ publish {
     userOrg = 'lisawray'
     groupId = 'com.xwray'
     artifactId = 'groupie-kotlin-android-extensions'
-    publishVersion = '2.1.0-alpha1'
+    publishVersion = '2.1.0-alpha3'
     desc = 'Library for groups and multiple view types in a RecyclerView'
     website = 'https://github.com/lisawray/groupie'
 }

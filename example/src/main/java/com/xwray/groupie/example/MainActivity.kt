@@ -65,6 +65,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         populateAdapter()
+
         groupLayoutManager = GridLayoutManager(this, groupAdapter.spanCount).apply {
             spanSizeLookup = groupAdapter.spanSizeLookup
         }
@@ -84,6 +85,8 @@ class MainActivity : AppCompatActivity() {
                 }
             })
         }
+        groupAdapter.update(sampleList())
+        groupAdapter.update(sampleList())
 
         ItemTouchHelper(touchCallback).attachToRecyclerView(recycler_view)
 
@@ -91,6 +94,22 @@ class MainActivity : AppCompatActivity() {
 
         prefs.registerListener(onSharedPrefChangeListener)
 
+    }
+
+    fun sampleList(): List<Group> {
+        val section = Section().apply {
+            val updatingHeader = HeaderItem(
+                    R.string.updating_group,
+                    R.string.updating_group_subtitle,
+                    R.drawable.shuffle,
+                    onShuffleClicked)
+            setHeader(updatingHeader)
+
+            addAll(updatableItems)
+        }
+        return mutableListOf<Group>().apply {
+            add(section)
+        }
     }
 
     private fun populateAdapter() {
